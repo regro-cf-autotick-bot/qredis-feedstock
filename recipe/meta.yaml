@@ -7,11 +7,11 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/qredis-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/qredis-{{ version }}.tar.gz
   sha256: 67b1e11e106ff8e68418b25ff06e55d772f529f94c13197927b63fdd299d51b9
 
 build:
-  number: 0
+  number: 1
   noarch: python
   entry_points:
     - qredis=qredis.window:main
@@ -20,13 +20,13 @@ build:
 requirements:
   host:
     - pip
-    - python >=3.5
+    - python {{ python_min }}
   run:
     - msgpack-python
     - msgpack-numpy
     - qtpy >=2
     - pyqt >=5
-    - python >=3.5
+    - python >={{ python_min }}
     - redis-py
 
 test:
@@ -38,6 +38,7 @@ test:
     - qredis --help
   requires:
     - pip
+    - python {{ python_min }}
 
 app:
   entry: qredis
